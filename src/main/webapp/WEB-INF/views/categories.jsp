@@ -153,17 +153,21 @@
             
             categories.forEach(category => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${category.id}</td>
-                    <td>${category.name}</td>
-                    <td>${category.images || 'N/A'}</td>
-                    <td>${category.products.length}</td>
-                    <td>${category.users.length}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning" onclick="editCategory(${category.id})">Sửa</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteCategory(${category.id})">Xóa</button>
-                    </td>
-                `;
+                
+                // Format data
+                const images = category.images || 'N/A';
+                
+                row.innerHTML = 
+                    '<td>' + category.id + '</td>' +
+                    '<td>' + category.name + '</td>' +
+                    '<td>' + images + '</td>' +
+                    '<td>' + category.products.length + '</td>' +
+                    '<td>' + category.users.length + '</td>' +
+                    '<td>' +
+                        '<button class="btn btn-sm btn-warning" onclick="editCategory(' + category.id + ')">Sửa</button> ' +
+                        '<button class="btn btn-sm btn-danger" onclick="deleteCategory(' + category.id + ')">Xóa</button>' +
+                    '</td>';
+                
                 tbody.appendChild(row);
             });
         }

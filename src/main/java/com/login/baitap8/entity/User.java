@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "`user`")  // Escape reserved keyword for SQL Server
 public class User {
     
     @Id

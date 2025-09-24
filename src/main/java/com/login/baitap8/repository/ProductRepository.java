@@ -26,7 +26,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
     
     // Lấy products theo user
-    List<Product> findByUserId(Long userId);
+    @Query("SELECT p FROM Product p WHERE p.user.id = :userId")
+    List<Product> findByUserId(@Param("userId") Long userId);
     
     @Query("SELECT p FROM Product p LEFT JOIN FETCH p.categories LEFT JOIN FETCH p.user")
     List<Product> findAllWithCategoriesAndUser();

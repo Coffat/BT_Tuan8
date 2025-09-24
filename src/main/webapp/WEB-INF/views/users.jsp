@@ -171,18 +171,23 @@
             
             users.forEach(user => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.fullname}</td>
-                    <td>${user.email}</td>
-                    <td>${user.phone || 'N/A'}</td>
-                    <td>${user.categories.map(cat => cat.name).join(', ')}</td>
-                    <td>${user.products.length}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning" onclick="editUser(${user.id})">Sửa</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteUser(${user.id})">Xóa</button>
-                    </td>
-                `;
+                
+                // Format data
+                const categoryNames = user.categories.map(cat => cat.name).join(', ');
+                const phone = user.phone || 'N/A';
+                
+                row.innerHTML = 
+                    '<td>' + user.id + '</td>' +
+                    '<td>' + user.fullname + '</td>' +
+                    '<td>' + user.email + '</td>' +
+                    '<td>' + phone + '</td>' +
+                    '<td>' + categoryNames + '</td>' +
+                    '<td>' + user.products.length + '</td>' +
+                    '<td>' +
+                        '<button class="btn btn-sm btn-warning" onclick="editUser(' + user.id + ')">Sửa</button> ' +
+                        '<button class="btn btn-sm btn-danger" onclick="deleteUser(' + user.id + ')">Xóa</button>' +
+                    '</td>';
+                
                 tbody.appendChild(row);
             });
         }

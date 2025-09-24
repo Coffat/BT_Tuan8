@@ -255,19 +255,24 @@
             
             products.forEach(product => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${product.id}</td>
-                    <td>${product.title}</td>
-                    <td>${product.quantity}</td>
-                    <td>${product.description || ''}</td>
-                    <td>$${product.price}</td>
-                    <td>${product.user ? product.user.fullname : 'N/A'}</td>
-                    <td>${product.categories.map(cat => cat.name).join(', ')}</td>
-                    <td>
-                        <button class="btn btn-sm btn-warning" onclick="editProduct(${product.id})">Sửa</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteProduct(${product.id})">Xóa</button>
-                    </td>
-                `;
+                
+                // Format categories
+                const categoryNames = product.categories.map(cat => cat.name).join(', ');
+                const userName = product.user ? product.user.fullname : 'N/A';
+                
+                row.innerHTML = 
+                    '<td>' + product.id + '</td>' +
+                    '<td>' + product.title + '</td>' +
+                    '<td>' + product.quantity + '</td>' +
+                    '<td>' + (product.description || '') + '</td>' +
+                    '<td>$' + product.price + '</td>' +
+                    '<td>' + userName + '</td>' +
+                    '<td>' + categoryNames + '</td>' +
+                    '<td>' +
+                        '<button class="btn btn-sm btn-warning" onclick="editProduct(' + product.id + ')">Sửa</button> ' +
+                        '<button class="btn btn-sm btn-danger" onclick="deleteProduct(' + product.id + ')">Xóa</button>' +
+                    '</td>';
+                
                 tbody.appendChild(row);
             });
         }
